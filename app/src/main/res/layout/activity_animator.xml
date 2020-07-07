@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context="com.example.administrator.epgiskotlin.activity.AnimatorActivity">
+
+    <TextView
+        android:id="@+id/p1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="java_animator" />
+
+    <TextView
+        android:id="@+id/p2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="xml_animator" />
+
+    <TextView
+        android:id="@+id/p3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="obj_animator" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/bt_startanimate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="开始动画" />
+
+        <Button
+            android:id="@+id/bt_pauseanimate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="pause" />
+
+        <Button
+            android:id="@+id/bt_resuemanimate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="resume" />
+
+        <Button
+            android:id="@+id/bt_stopmanimate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:stateListAnimator="@xml/bt_statelist"
+            android:text="stop" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/bt_pip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="pip" />
+
+</LinearLayout>

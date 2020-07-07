@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="right"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/commontext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="电压等级" />
+
+    <LinearLayout
+        style="@style/linearlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            style="@style/linearlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/commontext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="500kV" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/linearlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/commontext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="200kV" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/linearlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/commontext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="100kV" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        style="@style/commontext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="地图类型" />
+
+    <LinearLayout
+        style="@style/linearlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            style="@style/linearlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/map_style_shiliang"
+                style="@style/commontext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/map_style"
+                android:clickable="true"
+                android:text="矢量地图" />
+
+            <TextView
+                android:id="@+id/map_style_weixing"
+                style="@style/commontext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/map_style"
+                android:clickable="true"
+                android:text="卫星地图" />
+
+            <TextView
+                android:id="@+id/map_style_qianse"
+                style="@style/commontext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/map_style"
+                android:clickable="true"
+                android:text="浅色地图" />
+
+            <TextView
+                android:id="@+id/map_style_yese"
+                style="@style/commontext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/map_style"
+                android:clickable="true"
+                android:text="夜色地图" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">EpgisKotlin</string>
+    <string name="bt_hint">画中画</string>
+</resources>

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".MapActivity">
+
+    <com.baidu.mapapi.map.MapView
+        android:id="@+id/home_map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+    </com.baidu.mapapi.map.MapView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/ll_search"
+            style="@style/commonlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@mipmap/ic_launcher" />
+
+            <TextView
+                android:id="@+id/tv_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="搜索"
+                android:textSize="10sp" />
+
+            <Button
+                android:id="@+id/home_map_search"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:clickable="true"
+                android:text="search"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/bt_personalcenter"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_below="@id/ll_search"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:clickable="true"
+            android:src="@drawable/ic_launcher_background" />
+
+        <Button
+            android:id="@+id/bt_syntax"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/bt_personalcenter"
+            android:layout_toEndOf="@+id/bt_personalcenter"
+            android:layout_toRightOf="@+id/bt_personalcenter"
+            android:text="syntax" />
+
+        <ImageView
+            android:id="@+id/bt_menu"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_below="@+id/ll_search"
+            android:clickable="true"
+            android:src="@drawable/ic_launcher_background"
+            android:layout_alignParentRight="true" />
+
+        <!--主界面为一个空tv，右侧为侧滑菜单，左侧显示为个人中心-->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/bt_menu"
+            android:layout_centerInParent="true"
+            android:text="center"
+            android:id="@+id/textView" />
+
+        <android.support.v4.widget.DrawerLayout
+            android:id="@+id/drawlayout_"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/bt_menu"
+            android:visibility="gone">
+
+            <include
+                android:id="@+id/drawlayout_personalcenter"
+                layout="@layout/drawlayout_left"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="left" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <include
+                android:id="@+id/drawlayout_right"
+                layout="@layout/drawlayout_menu"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="right" />
+
+        </android.support.v4.widget.DrawerLayout>
+
+        <com.yinglan.scrolllayout.ScrollLayout
+            android:id="@+id/scrolllayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="50dp"
+            android:background="@color/white"
+            android:visibility="gone"
+            app:allowHorizontalScroll="true"
+            app:exitOffset="0dp"
+            app:isSupportExit="true"
+            app:maxOffset="50dp"
+            app:minOffset="0dp"
+            app:mode="open">
+
+            <LinearLayout
+                android:id="@+id/ll_click"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerviewinscroll"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/black">
+
+                </android.support.v7.widget.RecyclerView>
+            </LinearLayout>
+        </com.yinglan.scrolllayout.ScrollLayout>
+    </RelativeLayout>
+
+</FrameLayout>

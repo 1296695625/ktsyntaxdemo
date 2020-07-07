@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MapActivity">
+
+    <com.baidu.mapapi.map.MapView
+        android:id="@+id/baidumap"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </com.baidu.mapapi.map.MapView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            style="@style/commonlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/mapsrc"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@mipmap/ic_launcher" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="搜索"
+                android:layout_weight="1"
+                android:textSize="10sp" />
+
+            <Button
+                android:id="@+id/map_search"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:text="search"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <com.yinglan.scrolllayout.ScrollLayout
+            android:id="@+id/scrolllayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="50dp"
+            android:background="@color/white"
+            android:visibility="gone"
+            app:allowHorizontalScroll="true"
+            app:exitOffset="0dp"
+            app:isSupportExit="true"
+            app:maxOffset="50dp"
+            app:minOffset="0dp"
+            app:mode="open">
+
+            <LinearLayout
+                android:id="@+id/ll_click"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerviewinscroll"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/black">
+
+                </android.support.v7.widget.RecyclerView>
+            </LinearLayout>
+        </com.yinglan.scrolllayout.ScrollLayout>
+    </RelativeLayout>
+
+</FrameLayout>

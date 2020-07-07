@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello World!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/input"
+        style="@style/mycustomtext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="请输入..."
+        android:textSize="10sp" />
+
+    <LinearLayout
+        style="@style/commonlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/mycustomtext"
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+            android:text="手机号:" />
+
+        <EditText
+            android:id="@+id/loginname"
+            style="@style/mycustomtext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint=""
+            android:inputType="text" />
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/commonlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/mycustomtext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="密    码:" />
+
+        <EditText
+            android:id="@+id/loginpassword"
+            style="@style/mycustomtext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint=""
+            android:inputType="textPassword"
+            android:singleLine="true" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/loginbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        android:background="#ffffff"
+        android:text="登录" />
+    <Button
+        android:id="@+id/tobaidumap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        android:background="#ffffff"
+        android:text="百度地图" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/kotlin_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
+</LinearLayout>
