@@ -36,11 +36,13 @@ import kotlin.reflect.KProperty
  *
  * loop 循环，闭合边界使用until
  *
- * scope function let， run， with ，apply ，also
+ * scope function 有5种let， run， with （with this object, do the following.） ，apply ，also
  *
- * context 对象this： apply，run， with;  it：let , also
- * 返回对象 context apply ，also lambda表达式 let ，run， with
- *这5种都是执行对象区域函数，区别是对象的可见性和返回值
+ * context 对象是 this： apply，run， with;  是it：let , also
+ * 返回对象 上下文对象 apply ，also （可扩展方法）；lambda表达式 let ，run， with
+ *
+ *
+ *  这5种都是执行对象区域函数，区别是对象的可见性和返回值
  *  run ，let在某种条件下实现效果一致
  *
  *List ---mutablelist,可变list，可以增删改查
@@ -68,6 +70,7 @@ import kotlin.reflect.KProperty
  *  对于var，除以上2个参数，第3个参数value（和第一个参数一样）
  *
  *  ::class 反射，格式-类名::class，获取反射对象，是KClass类型的对象（java使用.java）
+ *
  *  ::function 方法作为参数引用
  *
  */
@@ -125,22 +128,26 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener, BaiduMap.OnMapCl
         }
     }
 
+    companion object {
+        var TAG: String = "liu"
+    }
+
     private fun doSyntax() {
         //let run with 返回的是表达式
         var temp = Rectangle(10.00).let {
-            LogUtils.v("lwh", "" + it.length())
+            LogUtils.v(TAG, "" + it.length())
             it.round += 10;
-            LogUtils.v("lwh", "" + it.round)
+            LogUtils.v(TAG, "" + it.round)
             it.radius()
-            LogUtils.v("lwh", "" + it.length())
-            LogUtils.v("lwh", "" + it.round)
+            LogUtils.v(TAG, "" + it.length())
+            LogUtils.v(TAG, "" + it.round)
         }
-        LogUtils.v("lwh", temp::class.java.name)
+        LogUtils.v(TAG, temp::class.java.name)
         //apply also 返回是对象本身
-        var temp1=Rectangle(1.00).also {
+        var temp1 = Rectangle(1.00).also {
             it.round++;
         }
-        LogUtils.v("lwh","also return value ${temp1.round}")
+        LogUtils.v(TAG, "also return value ${temp1.round}")
     }
 
     var geIntent: Intent? = null
@@ -161,23 +168,38 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener, BaiduMap.OnMapCl
     }
 
     lateinit var arrayList: List<String>
-    private var mutableList: MutableList<String>? = null
+    lateinit var mutableList: MutableList<String>
     private fun initData() {
-        //获取map对象
+        //获取百度地图map对象
         baiduMap = home_map.map;
         baiduMap?.setOnMapClickListener(this)
+
+        var array = arrayOfNulls<String>(10);
+        array[0] = "1"
+
         arrayList = arrayListOf<String>("1", "2", "3")
-        mutableList = mutableListOf<String>()
-        mutableList!!.add("1")
-        mutableList!!.add("2")
-        mutableList!!.add("3")
-        arrayList.filter(::isTwo)
-        for (str in mutableList!!) {
-            LogUtils.v("tfhr", str)
+        arrayList?.filter(::isTwo)//
+        arrayList?.filter { it.toInt() > 2 }.let {
+            s -> s.get(0)+1
+            LogUtils.v(TAG, "value > 2 ${s.size}")
         }
         for (str in arrayList) {
-            LogUtils.v("liu", str)
+            LogUtils.v(TAG, str)
         }
+        var m = mutableListOf<Int>(1, 2, 6)
+        m.add(3)
+        LogUtils.v(TAG, "mutablelist index 0 ${m[0]}")
+        mutableList = mutableListOf<String>()
+        mutableList?.add("1")
+        mutableList?.add("2")
+        mutableList?.add("3")
+        for (str in mutableList) {
+            LogUtils.v(TAG, str)
+        }
+    }
+
+    open fun strToInt():String{
+        return ""
     }
 
     private fun initView() {

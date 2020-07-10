@@ -9,6 +9,12 @@
     tools:context="com.example.administrator.epgiskotlin.activity.AnimatorActivity">
 
     <TextView
+        android:id="@+id/animatestatelist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="animatestatelist" />
+
+    <TextView
         android:id="@+id/p1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -52,14 +58,62 @@
             android:id="@+id/bt_stopmanimate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:stateListAnimator="@xml/bt_statelist"
             android:text="stop" />
     </LinearLayout>
-
+    <!--android:stateListAnimator="@xml/bt_statelist"-->
     <Button
         android:id="@+id/bt_pip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="pip" />
+
+    <LinearLayout
+        style="@style/commonlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/bt_read"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="read" />
+
+        <Button
+            android:id="@+id/bt_pause"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="暂停" />
+
+        <Button
+            android:id="@+id/bt_continue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="continue" />
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:id="@+id/recyclerview_download"
+        android:layout_height="wrap_content">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <ProgressBar
+        android:id="@+id/progressbar"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/white"
+        android:max="100"
+        android:min="0"
+        android:progress="0" />
+
+    <TextView
+        android:id="@+id/tv_percent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0%" />
 
 </LinearLayout>

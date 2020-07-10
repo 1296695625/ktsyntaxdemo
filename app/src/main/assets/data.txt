@@ -1,0 +1,37 @@
+handler 负责消息发送，通过sendmessage ,post等方法
+handler 和thread/messagequeue绑定，当创建一个handler的时候，handler默认和在创建线程绑定
+
+handler作用：1，在本线程规划制定某个将来要执行的消息，2，在其他线程入栈一个消息。
+
+schedule消息：post,postdelayed,postattime, sendmessage,sendemptymessage,sendmessageattime,sendmessagedelayed
+
+当message出栈，直接执行，或者延时执行。
+
+当应用app创建时，创建当前app一个进程，并且创建一个主线程，主线程用来处理activity，service，广播接收其它
+
+可创建自己的线程，通过handler和主线程main进行通信。
+
+looper为线程循环处理消息的类。线程创建不包含looper ,使用方式prepare和loop,但是需要handler来和thread通讯
+
+class LooperThread extends Thread {
+       public Handler mHandler;
+  
+        public void run() {
+            Looper.prepare();
+  
+            mHandler = new Handler() {
+                public void handleMessage(Message msg) {
+                    // process incoming messages here
+                }
+            };
+  
+            Looper.loop();
+        }
+    }
+
+注意:有关queue的状态修改的，不能再此类中，在messagequeue和handler中。
+当使用looper时必须调用prepare方法，否则looper对象为空
+
+开始轮询消息调loop方法，退出loop调用quit()，当调用loop一定调用quit方法。
+主线程的looper是安卓系统在创建应用的时候创建的，不需要自己创建。
+prepare方法中有校验looper重复创建的代码。

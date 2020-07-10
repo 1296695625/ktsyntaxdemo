@@ -13,7 +13,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         if (v.id == R.id.loginbt) {
 //            tv_name.setText(""+Math.random())
             var intent1: Intent=Intent();
-            intent1.putExtra("name", tv_name.text)
+            intent1.putExtra("name", tv_name.text.toString())
             intent1.setClass(this, HomeActivity::class.java)
             startActivity(intent1)
         }
