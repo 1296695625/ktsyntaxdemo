@@ -4,8 +4,12 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+def keystorePropertyFile = rootProject.file("keystore.properties")
+def keystoreProperty = new Properties();
+keystoreProperty.load(new FileInputStream(keystorePropertyFile))
+
 android {
-    compileSdkVersion 26
+    compileSdkVersion 28
     defaultConfig {
         applicationId "com.example.administrator.epgiskotlin"
         minSdkVersion 15
@@ -13,16 +17,28 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
+        flavorDimensions("default")
     }
     signingConfigs {
         debug {
-            keyAlias 'keykey'
-            keyPassword '123456'
-            storePassword '123456'
-            storeFile file('../mapsdkkey.jks')
+//            keyAlias 'keykey'
+//            keyPassword '123456'
+//            storePassword '123456'
+//            storeFile file('../mapsdkkey.jks')
         }
+        release {
+            configure {
+                keyAlias keystoreProperty['keyAlias']
+                keyPassword keystoreProperty['keyPassword']
+                storeFile file(keystoreProperty['storeFile'])
+                storePassword keystoreProperty['storePassword']
+
+            }
+        }
+
     }
+
+
     buildTypes {
         release {
             minifyEnabled false
@@ -35,6 +51,53 @@ android {
             jniLibs.srcDir 'libs'
         }
     }
+
+    productFlavors {
+//        guanwang {}
+//        jiuyao {}
+//        qq {}
+//        sanliuling {}
+//        wandoujia {}
+//        anzhi {}
+//        mumayi {}
+//        jifeng {}
+//        xiaomi {}
+//        lenovo {}
+        oppo {
+            manifestPlaceholders = [channelname: "oppo"]
+        }
+//        huawei {}
+//        jike {}
+//        sougou {}
+        meizu {
+            manifestPlaceholders = [channelname: "meizu"]
+        }
+    }
+
+//统一打包
+//    productFlavors.all {
+//        flavor -> flavor.manifestPlaceHolders = [channelname: name]
+//    }
+
+//    android.applicationVariants.all { variant ->
+//        variant.outputs.all {
+//            def newName
+//            newName="name-"+variant.name+".apk"
+////            outputFileName = "${variant.name}-${variant.versionName}.apk"
+//            outputFileName = newName
+//        }
+//    }
+//    variantFilter{
+//        variant->
+//            variant.outputs.all{
+//
+//            }
+//            def names=variant.flavors*.name // To check for a build type instead, use variant.buildType.name == "buildType"
+//            if (names.contains("minApi21") && names.contains("demo")) {
+//                // Gradle ignores any variants that satisfy the conditions above.
+//                setIgnore(true)
+//            }
+//    }
 }
 
 dependencies {

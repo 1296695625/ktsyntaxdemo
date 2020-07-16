@@ -8,6 +8,8 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+import com.example.administrator.epgiskotlin.activity.AnimatorActivity
+import com.example.administrator.epgiskotlin.activity.AnimatorKtActivity
 import com.example.administrator.epgiskotlin.activity.HomeActivity
 import com.example.administrator.epgiskotlin.utils.LogUtils
 import kotlinx.android.synthetic.main.activity_main.*
@@ -36,10 +38,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, TextWatcher {
             Log.v("tfhr", "this is ${3 + j}")
             startActivity(Intent(this@MainActivity, MapActivity::class.java))
         } else if (v.id == R.id.tobaidumap) {
-            var toHome= Intent();
+            var toHome = Intent();
             toHome.putExtra("name", loginname.text)
             toHome.setClass(this, HomeActivity::class.java)
             startActivity(toHome)
+        } else if (v.id == R.id.kt_animator) {
+            startActivity(Intent(this, AnimatorKtActivity::class.java))
         }
     }
 
@@ -68,6 +72,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, TextWatcher {
     }
 
     private fun initView() {
+        kt_animator.setOnClickListener(this)
         tobaidumap.setOnClickListener(this)
         loginbutton?.setOnClickListener(this)
         input?.setText(str)

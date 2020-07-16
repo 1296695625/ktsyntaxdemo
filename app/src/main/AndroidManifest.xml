@@ -26,13 +26,13 @@
     <uses-permission android:name="android.permission.CAMERA" />
     //程序在手机屏幕关闭后后台进程仍然运行
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!-- 系统设置权限 -->
+    <!-- <uses-permission android:name="android.permission.WRITE_SETTINGS" /> -->
     //sd卡读写权限
-    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
-    <!--<application android:permission="android:requestLegacyExternalStorage" />-->
-
+    <!-- <application android:permission="android:requestLegacyExternalStorage" /> -->
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -41,6 +41,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="channelname"
+            android:value="${channelname}" />
 
         <!-- 百度sdk鉴权 -->
         <!-- <meta-data -->
@@ -64,12 +67,15 @@
         <activity android:name=".activity.LoginActivity" />
         <activity
             android:name=".activity.HomeActivity"
-
-            android:windowSoftInputMode="stateHidden|adjustPan"></activity>
+            android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity
             android:name=".activity.AnimatorActivity"
             android:resizeableActivity="true"
-            android:supportsPictureInPicture="true"></activity>
+            android:supportsPictureInPicture="true" />
+        <activity android:name=".activity.AnimatorKtActivity"
+            android:resizeableActivity="true"
+            android:supportsPictureInPicture="true"
+            ></activity>
     </application>
 
 </manifest>

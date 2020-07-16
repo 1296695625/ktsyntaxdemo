@@ -312,8 +312,8 @@ public class AnimatorActivity extends AppCompatActivity implements View.OnClickL
                     @Override
                     public void run() {
                         try {
-//
-                            URL url1 = new URL("http://10.4.83.161:9000/getBackStr");
+//                           http://127.0.0.1:9000/fzgis2.0/pis_gis_nav/rest/queryCityTree/getBackStr
+                            URL url1 = new URL("http://10.4.83.161:9000/fzgis2.0/pis_gis_nav/rest/queryCityTree/getBackStr");
                             HttpURLConnection urlConnection = (HttpURLConnection) url1.openConnection();
                             urlConnection.setConnectTimeout(10000);
                             urlConnection.setDoInput(true);

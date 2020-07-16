@@ -4,30 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     android:orientation="vertical"
-    tools:context="com.example.administrator.epgiskotlin.activity.AnimatorActivity">
+    tools:context="com.example.administrator.epgiskotlin.activity.AnimatorKtActivity">
 
     <TextView
-        android:id="@+id/animatestatelist"
+        android:id="@+id/kt_animatestatelist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="animatestatelist" />
 
     <TextView
-        android:id="@+id/p1"
+        android:id="@+id/kt_p1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="java_animator" />
 
     <TextView
-        android:id="@+id/p2"
+        android:id="@+id/kt_p2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="xml_animator" />
 
     <TextView
-        android:id="@+id/p3"
+        android:id="@+id/kt_p3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="obj_animator" />
@@ -37,32 +36,32 @@
         android:layout_height="wrap_content">
 
         <Button
-            android:id="@+id/bt_startanimate"
+            android:id="@+id/kt_bt_startanimate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="开始动画" />
 
         <Button
-            android:id="@+id/bt_pauseanimate"
+            android:id="@+id/kt_bt_pauseanimate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="pause" />
 
         <Button
-            android:id="@+id/bt_resuemanimate"
+            android:id="@+id/kt_bt_resuemanimate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="resume" />
 
         <Button
-            android:id="@+id/bt_stopmanimate"
+            android:id="@+id/kt_bt_stopmanimate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="stop" />
     </LinearLayout>
     <!--android:stateListAnimator="@xml/bt_statelist"-->
     <Button
-        android:id="@+id/bt_pip"
+        android:id="@+id/kt_bt_pip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="pip" />
@@ -74,33 +73,33 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/bt_read"
+            android:id="@+id/kt_bt_read"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="read" />
 
         <Button
-            android:id="@+id/bt_pause"
+            android:id="@+id/kt_bt_pause"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="暂停" />
 
         <Button
-            android:id="@+id/bt_continue"
+            android:id="@+id/kt_bt_continue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="continue" />
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerview_download"
         android:layout_width="match_parent"
+        android:id="@+id/kt_recyclerview_download"
         android:layout_height="wrap_content">
 
     </android.support.v7.widget.RecyclerView>
 
     <ProgressBar
-        android:id="@+id/progressbar"
+        android:id="@+id/kt_progressbar"
         style="@android:style/Widget.ProgressBar.Horizontal"
         android:layout_width="match_parent"
         android:layout_height="8dp"
@@ -111,7 +110,7 @@
         android:progress="0" />
 
     <TextView
-        android:id="@+id/tv_percent"
+        android:id="@+id/kt_tv_percent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0%" />
