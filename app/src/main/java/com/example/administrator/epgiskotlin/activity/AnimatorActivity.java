@@ -57,6 +57,19 @@ import java.util.RandomAccess;
 
 import static com.baidu.location.e.l.A;
 
+/**
+ * （android 10）使用saf访问所有的存储文件，不需权限
+ *
+ * 使用分区存储的应用对自己创建的文件始终拥有读/写权限，无论文件是否位于应用的专有目录内。因此，如果您的应用仅保存和访问自己创建的文件，则无需请求获得 READ_EXTERNAL_STORAGE 或 WRITE_EXTERNAL_STORAGE 权限。
+ *
+ *android surpport(>=9 28及以上) 迁移到androidx 只是包名和maven 地址名改变，方法，类名都没改变
+ * 在项目的peoperties下添加
+ *android.useAndroidX=true
+ *android.enableJetifier=true
+ *查找surpport对应的androidX 的版本，https://developer.android.google.cn/jetpack/androidx/migrate/artifact-mappings?hl=en
+ *
+ */
+
 public class AnimatorActivity extends AppCompatActivity implements View.OnClickListener {
     private ValueAnimator valueAnimator;
     ValueAnimator valueAnimator1;
@@ -258,7 +271,7 @@ public class AnimatorActivity extends AppCompatActivity implements View.OnClickL
             case R.id.bt_read:
                 Log.v("tag", (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) + "");
                 if (f.exists()) {
-                    f.delete();
+//                    f.delete();
                 } else {
                     if (!f.getParentFile().exists()) {
                         f.getParentFile().mkdirs();
@@ -273,7 +286,7 @@ public class AnimatorActivity extends AppCompatActivity implements View.OnClickL
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        byte[] bytes = new byte[10];
+                        byte[] bytes = new byte[500];//可根据文件的大小设置bytes的大小，控制进度条的进度
                         int len = -1;
                         try {
 //                            InputStream fileInputStream = getAssets().open("data.txt");
@@ -304,10 +317,9 @@ public class AnimatorActivity extends AppCompatActivity implements View.OnClickL
                         }
                     }
                 }).start();
-
                 break;
             case R.id.bt_pause:
-
+//               todo 暂停，保存状态到数据库（文件大小，所有信息）,再次点击改变状态（继续下载）
                 new Thread(new Runnable() {
                     @Override
                     public void run() {

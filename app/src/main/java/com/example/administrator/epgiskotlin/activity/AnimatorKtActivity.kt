@@ -1,6 +1,6 @@
 package com.example.administrator.epgiskotlin.activity
 
-import android.animation.ValueAnimator
+import android.animation.*
 import android.app.PictureInPictureParams
 import android.os.Build
 import android.support.v7.app.AppCompatActivity
@@ -15,13 +15,16 @@ class AnimatorKtActivity : AppCompatActivity(), ValueAnimator.AnimatorUpdateList
     override fun onClick(v: View) {
         if (v.id == R.id.kt_bt_startanimate) {
             valueAnimator.start()
+            objectAnimator.start()
         } else if (v.id == R.id.kt_bt_pauseanimate) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                objectAnimator.pause()
                 valueAnimator.pause()
             }
-        } else if (v.id == R.id.kt_bt_continue) {
+        } else if (v.id == R.id.kt_bt_resuemanimate) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                 valueAnimator.resume()
+                objectAnimator.resume()
             }
         } else if (v.id == R.id.kt_bt_pip) {
             var builder: PictureInPictureParams.Builder = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -53,8 +56,15 @@ class AnimatorKtActivity : AppCompatActivity(), ValueAnimator.AnimatorUpdateList
     }
 
     lateinit var valueAnimator: ValueAnimator;
+    lateinit var objectAnimator: ObjectAnimator
 
     private fun initData() {
+
+        objectAnimator = ObjectAnimator.ofObject(kt_p3, "alpha", FloatEvaluator(), 0,0.5, 1)
+        objectAnimator.setDuration(3000)
+        objectAnimator.repeatMode = ObjectAnimator.REVERSE
+        objectAnimator.repeatCount = 5
+
         valueAnimator = ValueAnimator.ofInt(0, 1)
         valueAnimator.repeatMode = ValueAnimator.RESTART
         valueAnimator.repeatCount = 5
@@ -72,7 +82,7 @@ class AnimatorKtActivity : AppCompatActivity(), ValueAnimator.AnimatorUpdateList
         //lambda 表达式
         valueAnimator.addUpdateListener {
             kt_animatestatelist.alpha = it!!.animatedFraction
-            LogUtils.v("liu", "animator update listener")
+//            LogUtils.v("liu", "animator update listener")
         };
     }
 
@@ -81,5 +91,8 @@ class AnimatorKtActivity : AppCompatActivity(), ValueAnimator.AnimatorUpdateList
         kt_bt_pauseanimate.setOnClickListener(this)
         kt_bt_resuemanimate.setOnClickListener(this)
         kt_bt_pip.setOnClickListener(this)
+        kt_bt_stopmanimate.setOnClickListener{
+            objectAnimator.cancel()
+        }
     }
 }
