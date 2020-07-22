@@ -66,7 +66,9 @@ import static com.baidu.location.e.l.A;
  * 在项目的peoperties下添加
  *android.useAndroidX=true
  *android.enableJetifier=true
+ *
  *查找surpport对应的androidX 的版本，https://developer.android.google.cn/jetpack/androidx/migrate/artifact-mappings?hl=en
+ *迁移完成，所有的surpport包都会报错，修改包报错
  *
  */
 

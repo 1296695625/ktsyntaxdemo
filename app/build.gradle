@@ -42,6 +42,7 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {}
@@ -64,13 +65,13 @@ android {
 //        xiaomi {}
 //        lenovo {}
         oppo {
-            manifestPlaceholders = [channelname: "oppo"]
+            manifestPlaceholders = [c: "oppo"]
         }
 //        huawei {}
 //        jike {}
 //        sougou {}
         meizu {
-            manifestPlaceholders = [channelname: "meizu"]
+            manifestPlaceholders = [c: "meizu"]
         }
     }
 

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -77,7 +78,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, TextWatcher {
         loginbutton?.setOnClickListener(this)
         input?.setText(str)
         input?.addTextChangedListener(this)
-        kotlin_recyclerview?.layoutManager = LinearLayoutManager(this)
+        kotlin_recyclerview.layoutManager = LinearLayoutManager(this)
         recylerViewAdapter = RecylerViewAdapter(this)
         kotlin_recyclerview?.adapter = recylerViewAdapter
         recylerViewAdapter?.setData(arrayList)
