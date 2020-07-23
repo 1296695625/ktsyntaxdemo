@@ -12,11 +12,16 @@ import android.animation.TypeConverter;
 import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.app.PictureInPictureParams;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProvider;
+import android.arch.lifecycle.ViewModelProviders;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.os.storage.StorageManager;
+import android.support.annotation.Nullable;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -31,7 +36,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.epgiskotlin.R;
+import com.example.administrator.epgiskotlin.bean.DownloadInfo;
 import com.example.administrator.epgiskotlin.bean.Rectangle;
+import com.example.administrator.epgiskotlin.model.LiveDataModel;
 import com.example.administrator.epgiskotlin.utils.LogUtils;
 
 import java.io.ByteArrayInputStream;
@@ -98,7 +105,13 @@ public class AnimatorActivity extends AppCompatActivity implements View.OnClickL
 
         recyclerView = findViewById(R.id.recyclerview_download);
 //        recyclerView.setAdapter();
-
+        LiveDataModel liveDataModel= ViewModelProviders.of(this).get(LiveDataModel.class);
+        liveDataModel.liveData.observe(this, new Observer<DownloadInfo>() {
+            @Override
+            public void onChanged(@Nullable DownloadInfo downloadInfo) {
+                //更新ui
+            }
+        });
         myHandler = new MyHandler();
         setFont();
 
@@ -161,6 +174,9 @@ public class AnimatorActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void doLet() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            getSystemService(StorageManager.class);
+        }
     }
 
     //设置字体,最新设置按照android 8设置字体R.font.**** 来

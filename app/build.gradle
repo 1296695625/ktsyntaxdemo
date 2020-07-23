@@ -9,7 +9,7 @@ def keystoreProperty = new Properties();
 keystoreProperty.load(new FileInputStream(keystorePropertyFile))
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
     defaultConfig {
         applicationId "com.example.administrator.epgiskotlin"
         minSdkVersion 15
@@ -113,6 +113,9 @@ dependencies {
     implementation 'com.android.support:design:26.1.0'
     implementation files('libs/BaiduLBS_Android.jar')
     implementation 'com.yinglan.scrolllayout:scrolllayout:1.0.2'
+    implementation 'android.arch.lifecycle:viewmodel:1.1.1'
+    implementation 'android.arch.lifecycle:livedata-core:1.1.1'
+    implementation 'android.arch.lifecycle:extensions:1.1.1'
 
 //    implementation "androidx.lifecycle:lifecycle-extensions:2.0.0"
 
