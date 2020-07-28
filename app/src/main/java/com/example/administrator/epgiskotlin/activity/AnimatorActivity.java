@@ -15,6 +15,7 @@ import android.app.PictureInPictureParams;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
+import android.graphics.Canvas;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Environment;
@@ -40,6 +41,7 @@ import com.example.administrator.epgiskotlin.bean.DownloadInfo;
 import com.example.administrator.epgiskotlin.bean.Rectangle;
 import com.example.administrator.epgiskotlin.model.LiveDataModel;
 import com.example.administrator.epgiskotlin.utils.LogUtils;
+import com.example.administrator.epgiskotlin.view.CustomView;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -65,27 +67,34 @@ import java.util.RandomAccess;
 import static com.baidu.location.e.l.A;
 
 /**
+ * google 权限管理框架rxpermission
+ * <p>
+ * mapbox,使用原声带opengl来绘制，2d或者3d效果。先注册新建项目获取sdk的key value，添加到清单文件中（官网建议在本地读取，不要显式的放在清单文件）
+ * 2种方式，添加依赖集成或者下载sdk集成，
+ * <p>
  * （android 10）使用saf访问所有的存储文件，不需权限
- *
+ * <p>
  * 使用分区存储的应用对自己创建的文件始终拥有读/写权限，无论文件是否位于应用的专有目录内。因此，如果您的应用仅保存和访问自己创建的文件，则无需请求获得 READ_EXTERNAL_STORAGE 或 WRITE_EXTERNAL_STORAGE 权限。
- *
- *android surpport(>=9 28及以上) 迁移到androidx 只是包名和maven 地址名改变，方法，类名都没改变
+ * <p>
+ * android surpport(>=9 28及以上) 迁移到androidx 只是包名和maven 地址名改变，方法，类名都没改变
  * 在项目的peoperties下添加
- *android.useAndroidX=true
- *android.enableJetifier=true
- *
- *查找surpport对应的androidX 的版本，https://developer.android.google.cn/jetpack/androidx/migrate/artifact-mappings?hl=en
- *迁移完成，所有的surpport包都会报错，修改包报错
- *
+ * android.useAndroidX=true
+ * android.enableJetifier=true
+ * <p>
+ * 查找surpport对应的androidX 的版本，https://developer.android.google.cn/jetpack/androidx/migrate/artifact-mappings?hl=en
+ * 迁移完成，所有的surpport包都会报错，修改包报错
+ * <p>
+ * retrofit 使用注解调用java接口,返回call类型，calladaptorfactory(这里使用rxjava的calladaptor),可以converter.factory转换
  */
 
 public class AnimatorActivity extends AppCompatActivity implements View.OnClickListener {
     private ValueAnimator valueAnimator;
     ValueAnimator valueAnimator1;
     private TextView tv, tv2, tv3, tv_percent;
-    private Button bt_satartanimate, bt_pauseanimator, bt_resumeanimator, bt_stopanimator, bt_pip, bt_read, bt_pause, bt_continue;
+    private Button bt_save,bt_reset, bt_satartanimate, bt_pauseanimator, bt_resumeanimator, bt_stopanimator, bt_pip, bt_read, bt_pause, bt_continue;
     ProgressBar progressBar;
     private RecyclerView recyclerView;
+    private CustomView customView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,11 +110,31 @@ public class AnimatorActivity extends AppCompatActivity implements View.OnClickL
         bt_read.setOnClickListener(this);
         bt_pause.setOnClickListener(this);
         bt_continue.setOnClickListener(this);
-        progressBar = findViewById(R.id.progressbar);
+        customView = findViewById(R.id.customview);
+        customView.setBitmapWidth(200);
+        customView.setBitmapHeight(200);
+        customView.setPathWidth(3f);
+        bt_save=findViewById(R.id.bt_save);
+        bt_save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //保存到相册
 
+            }
+        });
+        bt_reset = findViewById(R.id.bt_reset);
+        bt_reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (null != customView) {
+                    customView.reset();
+                }
+            }
+        });
+        progressBar = findViewById(R.id.progressbar);
         recyclerView = findViewById(R.id.recyclerview_download);
 //        recyclerView.setAdapter();
-        LiveDataModel liveDataModel= ViewModelProviders.of(this).get(LiveDataModel.class);
+        LiveDataModel liveDataModel = ViewModelProviders.of(this).get(LiveDataModel.class);
         liveDataModel.liveData.observe(this, new Observer<DownloadInfo>() {
             @Override
             public void onChanged(@Nullable DownloadInfo downloadInfo) {

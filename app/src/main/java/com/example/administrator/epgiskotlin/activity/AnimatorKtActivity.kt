@@ -13,6 +13,9 @@ import kotlinx.android.synthetic.main.activity_animator_kt.*
 
 class AnimatorKtActivity : AppCompatActivity(), ValueAnimator.AnimatorUpdateListener, View.OnClickListener {
     override fun onClick(v: View) {
+        if (v.id == R.id.kt_reset) {
+            kt_customview.reset()
+        }
         if (v.id == R.id.kt_bt_startanimate) {
             valueAnimator.start()
             objectAnimator.start()
@@ -60,7 +63,7 @@ class AnimatorKtActivity : AppCompatActivity(), ValueAnimator.AnimatorUpdateList
 
     private fun initData() {
 
-        objectAnimator = ObjectAnimator.ofObject(kt_p3, "alpha", FloatEvaluator(), 0,0.5, 1)
+        objectAnimator = ObjectAnimator.ofObject(kt_p3, "alpha", FloatEvaluator(), 0, 0.5, 1)
         objectAnimator.setDuration(3000)
         objectAnimator.repeatMode = ObjectAnimator.REVERSE
         objectAnimator.repeatCount = 5
@@ -87,11 +90,13 @@ class AnimatorKtActivity : AppCompatActivity(), ValueAnimator.AnimatorUpdateList
     }
 
     private fun initView() {
+        kt_customview.setPathWidth(2f)
+        kt_reset.setOnClickListener(this)
         kt_bt_startanimate.setOnClickListener(this)
         kt_bt_pauseanimate.setOnClickListener(this)
         kt_bt_resuemanimate.setOnClickListener(this)
         kt_bt_pip.setOnClickListener(this)
-        kt_bt_stopmanimate.setOnClickListener{
+        kt_bt_stopmanimate.setOnClickListener {
             objectAnimator.cancel()
         }
     }

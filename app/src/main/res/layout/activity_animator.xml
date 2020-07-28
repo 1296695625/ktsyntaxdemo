@@ -116,4 +116,29 @@
         android:layout_height="wrap_content"
         android:text="0%" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/bt_reset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="重绘" />
+
+        <Button
+            android:id="@+id/bt_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="save" />
+
+    </LinearLayout>
+
+    <com.example.administrator.epgiskotlin.view.CustomView
+        android:id="@+id/customview"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="200dp" />
+
 </LinearLayout>
