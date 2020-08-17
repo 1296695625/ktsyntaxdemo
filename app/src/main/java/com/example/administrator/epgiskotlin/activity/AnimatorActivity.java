@@ -15,6 +15,7 @@ import android.app.PictureInPictureParams;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Typeface;
 import android.os.Build;
@@ -30,6 +31,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.util.Property;
 import android.util.Rational;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -41,6 +43,7 @@ import com.example.administrator.epgiskotlin.bean.DownloadInfo;
 import com.example.administrator.epgiskotlin.bean.Rectangle;
 import com.example.administrator.epgiskotlin.model.LiveDataModel;
 import com.example.administrator.epgiskotlin.utils.LogUtils;
+import com.example.administrator.epgiskotlin.view.CustomBitmapView;
 import com.example.administrator.epgiskotlin.view.CustomView;
 
 import java.io.ByteArrayInputStream;
@@ -91,15 +94,18 @@ public class AnimatorActivity extends AppCompatActivity implements View.OnClickL
     private ValueAnimator valueAnimator;
     ValueAnimator valueAnimator1;
     private TextView tv, tv2, tv3, tv_percent;
-    private Button bt_save,bt_reset, bt_satartanimate, bt_pauseanimator, bt_resumeanimator, bt_stopanimator, bt_pip, bt_read, bt_pause, bt_continue;
+    private Button bt_plus, bt_minus, bt_bitmap, bt_save, bt_reset, bt_satartanimate, bt_pauseanimator, bt_resumeanimator, bt_stopanimator, bt_pip, bt_read, bt_pause, bt_continue;
     ProgressBar progressBar;
     private RecyclerView recyclerView;
     private CustomView customView;
+    private CustomBitmapView customBitmapView;
+    private float defaultWidth = 1f;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_animator);
+        customBitmapView = findViewById(R.id.custombitmapview);
         tv = findViewById(R.id.p1);
         tv2 = findViewById(R.id.p2);
         tv3 = findViewById(R.id.p3);
@@ -114,7 +120,13 @@ public class AnimatorActivity extends AppCompatActivity implements View.OnClickL
         customView.setBitmapWidth(200);
         customView.setBitmapHeight(200);
         customView.setPathWidth(3f);
-        bt_save=findViewById(R.id.bt_save);
+        bt_save = findViewById(R.id.bt_save);
+        bt_bitmap = findViewById(R.id.bt_bitmap);
+        bt_bitmap.setOnClickListener(this);
+        bt_plus = findViewById(R.id.bt_plus);
+        bt_plus.setOnClickListener(this);
+        bt_minus = findViewById(R.id.bt_minus);
+        bt_minus.setOnClickListener(this);
         bt_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -128,6 +140,9 @@ public class AnimatorActivity extends AppCompatActivity implements View.OnClickL
             public void onClick(View v) {
                 if (null != customView) {
                     customView.reset();
+                }
+                if (null != customBitmapView) {
+                    customBitmapView.reset();
                 }
             }
         });
@@ -149,7 +164,7 @@ public class AnimatorActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onClick(View v) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                         PictureInPictureParams.Builder builder = new PictureInPictureParams.Builder();
                         builder.setAspectRatio(new Rational(1, 2));//设置宽高比例
                         enterPictureInPictureMode(builder.build());
@@ -315,6 +330,26 @@ public class AnimatorActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.bt_plus:
+                if (defaultWidth < 5) {
+                    defaultWidth++;
+                }
+                if (null != customBitmapView) {
+                    customBitmapView.setPathWidth(defaultWidth);
+                }
+                break;
+            case R.id.bt_minus:
+                if (defaultWidth > 1) {
+                    defaultWidth--;
+                }
+                if (null != customBitmapView) {
+                    customBitmapView.setPathWidth(defaultWidth);
+                }
+                break;
+            case R.id.bt_bitmap:
+                customBitmapView.setBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.bitmap));
+                customBitmapView.invalidate();
+                break;
             case R.id.bt_read:
                 Log.v("tag", (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) + "");
                 if (f.exists()) {

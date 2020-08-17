@@ -133,12 +133,35 @@
             android:layout_height="wrap_content"
             android:text="save" />
 
+        <Button
+            android:id="@+id/bt_bitmap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="bitmap" />
+
+        <Button
+            android:id="@+id/bt_plus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+" />
+
+        <Button
+            android:id="@+id/bt_minus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-" />
+
     </LinearLayout>
 
     <com.example.administrator.epgiskotlin.view.CustomView
         android:id="@+id/customview"
-        android:layout_gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="200dp" />
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_gravity="center" />
+    <com.example.administrator.epgiskotlin.view.CustomBitmapView
+        android:layout_width="match_parent"
+        android:id="@+id/custombitmapview"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

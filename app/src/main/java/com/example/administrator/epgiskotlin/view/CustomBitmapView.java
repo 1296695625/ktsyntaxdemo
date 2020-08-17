@@ -2,33 +2,57 @@ package com.example.administrator.epgiskotlin.view;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.graphics.Rect;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
+
 /**
- * Created by liu on 2020/7/28.
+ * Created by liu on 2020/7/29.
  */
 
-public class CustomView extends View {
+public class CustomBitmapView extends View {
 
     private Paint pathPaint;
     private Paint drawablePaint;
     private Path mPath;
-    private int bitmapWidth=1, bitmapHeight=1;//默认为200，300,width,height必须>=0
+    private int bitmapWidth = 200, bitmapHeight = 100;//默认为200，300,width,height必须>=0
 
-    private Bitmap bitmap;
+    private Bitmap bitmap, temBitmap;
 
     private float x, y;
 
-    public CustomView(Context context) {
+    public CustomBitmapView(Context context) {
         super(context);
+        init();
+    }
+
+    public CustomBitmapView(Context context, @Nullable AttributeSet attrs) {
+        super(context, attrs);
+        init();
+    }
+
+    //
+    public void setBitmap(Bitmap bitmap) {
+        this.temBitmap = bitmap;
+        if (null != temBitmap) {
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            temBitmap.isMutable();
+            Log.v("liu", "test bitmap is mutable");
+//            temBitmap.setWidth(200);
+//            temBitmap.setHeight(300);
+        }
+    }
+
+    public CustomBitmapView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
         init();
     }
 
@@ -51,6 +75,7 @@ public class CustomView extends View {
         }
     }
 
+
     private void init() {
         pathPaint = new Paint();
         pathPaint.setAntiAlias(true);
@@ -66,21 +91,38 @@ public class CustomView extends View {
         return bitmap;
     }
 
-    public CustomView(Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
-        init();
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_POINTER_DOWN) {
+            Log.v("liu", "dispatch event--" + event.getAction());
+//            return true;
+        }
+        return super.dispatchTouchEvent(event);
     }
 
-    public CustomView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        init();
-    }
-
+    /**
+     * 获取x，y，根据end和start坐标点x轴上，y轴上之差（math.abs(endx-startx),math.abs(endy-starty)）来区别是x轴或者是y轴
+     * @param event
+     * @return
+     */
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         x = event.getX();
         y = event.getY();
         switch (event.getAction()) {
+            case MotionEvent.ACTION_POINTER_INDEX_SHIFT:
+                Log.v("liu", "event --shift" + event.getAction());
+                break;
+            case MotionEvent.ACTION_POINTER_INDEX_MASK:
+                Log.v("liu", "event --mask" + event.getActionMasked());
+                break;
+            case MotionEvent.ACTION_POINTER_DOWN:
+                Log.v("liu", "event --down" + event.getActionMasked());
+                break;
+            case MotionEvent.ACTION_POINTER_UP:
+                Log.v("liu", "event --up" + event.getAction());
+                break;
             case MotionEvent.ACTION_MOVE:
                 mPath.quadTo(x, y, event.getX(), event.getY());
                 x = event.getX();
@@ -108,16 +150,19 @@ public class CustomView extends View {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         if (0 != bitmapHeight && 0 != bitmapHeight) {
-            setMeasuredDimension(bitmapWidth, bitmapHeight);
+//            setMeasuredDimension(bitmapWidth, bitmapHeight);
         }
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        canvas.drawBitmap(bitmap, 0, 0, drawablePaint);
+        if (null != temBitmap) {
+            canvas.drawBitmap(temBitmap, 0, 0, new Paint());
+        } else {
+            canvas.drawBitmap(bitmap, 0, 0, drawablePaint);
+        }
         canvas.drawPath(mPath, pathPaint);
     }
 }
